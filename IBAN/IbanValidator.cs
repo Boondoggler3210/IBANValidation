@@ -97,28 +97,12 @@ public static class IbanValidator
             result.Error = new ValidationError{Code = ErrorCode.EmptyOrTooShort, Message = "IBAN is empty or too short"};
             return result;
         }
-        
+           
         string firstFour = _iban.Substring(0, 4);
         _iban = _iban.Remove(0, 4);
         _iban += firstFour;
-        string ibanAsInteger = "";
-
-        foreach(var c in _iban)
-        {
-            int value = 0;
-            if (char.IsLetter(c))
-            {   
-                var letter = char.ToUpper(c);
-                value = letter - 55;
-            }
-            else
-            {
-                value = int.Parse(c.ToString());
-            }
-            ibanAsInteger += value.ToString();
-        }
         
-        var modulusResult = BigInteger.Parse(ibanAsInteger) % 97;
+        var modulusResult = ConvertIbanToBigInteger(_iban) % 97;
         
         if (modulusResult == 1)
         {
@@ -182,6 +166,28 @@ public static class IbanValidator
         _iban = _iban.Remove(0, 4);
         _iban += firstFour;
         
+        var modulusResult = ConvertIbanToBigInteger(_iban) % 97;
+        
+        if(98 - (int)modulusResult >= 10)
+        {
+            return (98 - (int)modulusResult).ToString();
+        }
+        else
+        {
+            return "0" + (98 - (int)modulusResult).ToString();
+        }
+
+    }
+
+    private static BigInteger ConvertIbanToBigInteger(string iban)
+    {
+        string _iban = iban;
+        if(string.IsNullOrEmpty(_iban) || _iban.Length < 2)
+        {
+            throw new ArgumentException("IBAN is empty or too short");
+        }
+
+        
         string ibanAsInteger = "";
 
         foreach(var c in _iban)
@@ -199,17 +205,16 @@ public static class IbanValidator
             ibanAsInteger += value.ToString();
         }
         
-        var modulusResult = BigInteger.Parse(ibanAsInteger) % 97;
-        
-        if(98 - (int)modulusResult >= 10)
+        if(BigInteger.TryParse(ibanAsInteger, out BigInteger result))
         {
-            return (98 - (int)modulusResult).ToString();
+            return result;
         }
         else
         {
-            return "0" + (98 - (int)modulusResult).ToString();
+            throw new ArgumentException("IBAN is too long to be converted to BigInteger");
         }
 
     }
 
 }
+
