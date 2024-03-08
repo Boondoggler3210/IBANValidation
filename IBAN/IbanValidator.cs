@@ -4,10 +4,10 @@ using Iban.Data;
 
 namespace Iban;
 
-public static class IbanValidator
+public class IbanValidator : IAccountValidator
 {   
 
-    public static ValidationResult Validate(string iban, bool checkFormat = false)
+    public ValidationResult Validate(string iban, bool checkFormat = false)
     {
         bool _checkFormat = checkFormat;
 
