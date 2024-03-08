@@ -90,9 +90,11 @@ var ibans =  new List<string>(){"AD1200012030200359100100",
 };
 
 
+IbanValidator validator = new IbanValidator();
+
 foreach(var iban in ibans)
 {
-    var res = IbanValidator.Validate(iban, true);
+    var res = validator.Validate(iban, true);
     if(res.IsValid == false){
         
         Console.WriteLine();
