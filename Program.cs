@@ -122,11 +122,4 @@ foreach(var error in bicRes.Errors)
     Console.WriteLine(error.Message);
 }
 
-Console.WriteLine();
-Console.WriteLine();
-Console.WriteLine();
-foreach(var country in IsoCountryCodes.IsoCountryBy2Code)
-{
-    Console.WriteLine($"{{\"{country.Value.Name}\", \"{country.Key}\"}},");
-}
 
