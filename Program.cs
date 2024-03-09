@@ -1,4 +1,5 @@
-﻿using Iban;
+﻿using Bic;
+using Iban;
 
 var ibans =  new List<string>(){"AD1200012030200359100100",
 "AE070331234567890123456",
@@ -94,7 +95,7 @@ IbanValidator validator = new IbanValidator();
 
 foreach(var iban in ibans)
 {
-    var res = validator.Validate(iban, true);
+    var res = validator.Validate(iban);
     if(res.IsValid == false){
         
         Console.WriteLine();
@@ -106,5 +107,17 @@ foreach(var iban in ibans)
         }
     }
 
+}
+
+BicValidator bicValidator = new BicValidator();
+
+var bicRes = bicValidator.Validate("RABOZZ2U");
+
+Console.WriteLine();
+Console.WriteLine(bicRes.IsValid);
+foreach(var error in bicRes.Errors)
+{
+    Console.WriteLine(error.Code);
+    Console.WriteLine(error.Message);
 }
 

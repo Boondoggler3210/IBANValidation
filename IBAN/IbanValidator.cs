@@ -7,9 +7,9 @@ namespace Iban;
 public class IbanValidator : IAccountValidator
 {   
 
-    public ValidationResult Validate(string iban, bool checkFormat = false)
+    public ValidationResult Validate(string iban)
     {
-        bool _checkFormat = checkFormat;
+        
 
         var result = new ValidationResult();
         result.IsValid = true;
@@ -37,8 +37,8 @@ public class IbanValidator : IAccountValidator
                 result.Errors.Add(modulusCheckResult.Error);
             }
         }
-        
-        if(checkFormat)
+
+        if(result.IsValid == false)
         {
             var formatCheckResult = CheckFormat(iban);
             if(formatCheckResult.IsValid == false)
@@ -46,8 +46,9 @@ public class IbanValidator : IAccountValidator
                 result.IsValid = false;
                 result.Errors.Add(formatCheckResult.Error);
             }
+
         }
-        
+                
         return result;
     }
 
