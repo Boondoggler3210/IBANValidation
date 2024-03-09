@@ -1,4 +1,5 @@
 ﻿using Bic;
+using Bic.Data;
 using Iban;
 
 var ibans =  new List<string>(){"AD1200012030200359100100",
@@ -119,5 +120,13 @@ foreach(var error in bicRes.Errors)
 {
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);
+}
+
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
+foreach(var country in IsoCountryCodes.IsoCountryBy2Code)
+{
+    Console.WriteLine($"{{\"{country.Value.Name}\", \"{country.Key}\"}},");
 }
 
