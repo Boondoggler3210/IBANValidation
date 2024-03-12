@@ -1,6 +1,7 @@
 ﻿using Bic;
 using Bic.Data;
 using Iban;
+using RFCreditorReference;
 
 var ibans =  new List<string>(){"AD1200012030200359100100",
 "AE070331234567890123456",
@@ -122,4 +123,13 @@ foreach(var error in bicRes.Errors)
     Console.WriteLine(error.Message);
 }
 
+RFCreditorReferenceValidator rFCreditorReferenceValidator = new RFCreditorReferenceValidator();
 
+var rFCreditorReferenceRes = rFCreditorReferenceValidator.Validate("RF58539007547034");
+Console.WriteLine();
+Console.WriteLine(rFCreditorReferenceRes.IsValid);
+foreach(var error in rFCreditorReferenceRes.Errors)
+{
+    Console.WriteLine(error.Code);
+    Console.WriteLine(error.Message);
+}

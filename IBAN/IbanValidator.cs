@@ -1,6 +1,7 @@
 using System.Numerics;
 using System.Text.RegularExpressions;
 using Iban.Data;
+using CheckCharacterSystems;
 
 namespace Iban;
 
@@ -103,9 +104,9 @@ public class IbanValidator : IAccountValidator
         _iban = _iban.Remove(0, 4);
         _iban += firstFour;
         
-        var modulusResult = ConvertIbanToBigInteger(_iban) % 97;
+        var modulusResult = new ISO7064_MOD9710();
         
-        if (modulusResult == 1)
+        if (modulusResult.Validate(_iban) == true)
         {
             result.IsValid = true;
             return result;
@@ -167,17 +168,9 @@ public class IbanValidator : IAccountValidator
         _iban = _iban.Remove(0, 4);
         _iban += firstFour;
         
-        var modulusResult = ConvertIbanToBigInteger(_iban) % 97;
-        
-        if(98 - (int)modulusResult >= 10)
-        {
-            return (98 - (int)modulusResult).ToString();
-        }
-        else
-        {
-            return "0" + (98 - (int)modulusResult).ToString();
-        }
 
+        var checkdigits = new ISO7064_MOD9710().Calculate(_iban);
+        return checkdigits;
     }
 
     private static BigInteger ConvertIbanToBigInteger(string iban)

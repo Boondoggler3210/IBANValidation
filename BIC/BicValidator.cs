@@ -37,7 +37,7 @@ public class BicValidator : IAccountValidator
             }
         }
             
-        var countryCodeCheckResult = CountryCode(_bic);
+        var countryCodeCheckResult = CheckCountryCode(_bic);
         if(countryCodeCheckResult.IsValid == false)
         {
             _result.IsValid = false;
@@ -46,7 +46,7 @@ public class BicValidator : IAccountValidator
         return _result;
     }
 
-    private static FormatCheckResult CountryCode(string bic)
+    private static FormatCheckResult CheckCountryCode(string bic)
     {
         string _bic = bic;
         FormatCheckResult _result = new FormatCheckResult();
