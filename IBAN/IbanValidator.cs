@@ -5,7 +5,7 @@ using CheckCharacterSystems;
 
 namespace Iban;
 
-public class IbanValidator : IAccountValidator
+public class IbanValidator : IReferenceOrAccountValidator
 {   
 
     public ValidationResult Validate(string iban)
@@ -26,7 +26,10 @@ public class IbanValidator : IAccountValidator
         if(lengthCheckResult.IsValid == false)
         {
             result.IsValid = false;
-            result.Errors.Add(lengthCheckResult.Error);
+            if(lengthCheckResult.Error != null)
+            {
+                result.Errors.Add(lengthCheckResult.Error);
+            }
         }
 
         if(result.IsValid == true)
@@ -35,7 +38,10 @@ public class IbanValidator : IAccountValidator
             if(modulusCheckResult.IsValid == false)
             {
                 result.IsValid = false;
-                result.Errors.Add(modulusCheckResult.Error);
+                if(modulusCheckResult.Error != null)
+                {
+                    result.Errors.Add(modulusCheckResult.Error);
+                }
             }
         }
 
@@ -45,7 +51,10 @@ public class IbanValidator : IAccountValidator
             if(formatCheckResult.IsValid == false)
             {
                 result.IsValid = false;
-                result.Errors.Add(formatCheckResult.Error);
+                if(formatCheckResult.Error != null)
+                {
+                    result.Errors.Add(formatCheckResult.Error);
+                }
             }
 
         }
@@ -115,7 +124,7 @@ public class IbanValidator : IAccountValidator
         {
             result.IsValid = false;
             result.Error = new ValidationError{Code = ErrorCode.InvalidModulus, Message = "mod 97-10 check failed."};
-            var checkDigits = CalculateCheckDigits(iban);
+            var checkDigits = new IbanValidator().CalculateCheckCharacters(iban);
             result.Error.Message += $" Correct check digits for this IBAN are {checkDigits}";
             return result;
         }
@@ -131,7 +140,7 @@ public class IbanValidator : IAccountValidator
             return result;
         }
 
-        IbanCountryData countryData;
+        IbanCountryData? countryData;
         if(IbanData.CountryData.TryGetValue(iban.Substring(0, 2), out countryData))
         {
             if (Regex.IsMatch(iban, countryData.IBANFormatRegex))
@@ -155,7 +164,7 @@ public class IbanValidator : IAccountValidator
         
     }
 
-    public static string CalculateCheckDigits(string iban)
+    public string CalculateCheckCharacters(string iban)
     {
         string _iban = iban;
         if(string.IsNullOrEmpty(_iban) || _iban.Length < 2)
@@ -171,43 +180,6 @@ public class IbanValidator : IAccountValidator
 
         var checkdigits = new ISO7064_MOD9710().Calculate(_iban);
         return checkdigits;
-    }
-
-    private static BigInteger ConvertIbanToBigInteger(string iban)
-    {
-        string _iban = iban;
-        if(string.IsNullOrEmpty(_iban) || _iban.Length < 2)
-        {
-            throw new ArgumentException("IBAN is empty or too short");
-        }
-
-        
-        string ibanAsInteger = "";
-
-        foreach(var c in _iban)
-        {
-            int value = 0;
-            if (char.IsLetter(c))
-            {   
-                var letter = char.ToUpper(c);
-                value = letter - 55;
-            }
-            else
-            {
-                value = int.Parse(c.ToString());
-            }
-            ibanAsInteger += value.ToString();
-        }
-        
-        if(BigInteger.TryParse(ibanAsInteger, out BigInteger result))
-        {
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException("IBAN is too long to be converted to BigInteger");
-        }
-
     }
 
 }

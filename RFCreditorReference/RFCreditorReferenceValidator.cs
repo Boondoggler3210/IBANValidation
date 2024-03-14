@@ -3,7 +3,7 @@ using Iban;
 
 namespace RFCreditorReference;
 
-public class RFCreditorReferenceValidator : IAccountValidator
+public class RFCreditorReferenceValidator : IReferenceOrAccountValidator
 {
     public ValidationResult Validate(string rFCreditorReference)
     {
@@ -21,12 +21,14 @@ public class RFCreditorReferenceValidator : IAccountValidator
         if (modulusCheckResult.IsValid == false)
         {
             _result.IsValid = false;
-            _result.Errors.Add(modulusCheckResult.Error);
+            if(modulusCheckResult.Error != null)
+            {
+                _result.Errors.Add(modulusCheckResult.Error);
+            }
         }
 
         return _result;
     }
-
     private static ModulusCheckResult CheckModulus(string rFCreditorReference)
     {
         var _result = new ModulusCheckResult();
@@ -54,19 +56,19 @@ public class RFCreditorReferenceValidator : IAccountValidator
         {
             _result.IsValid = false;
             _result.Error = new ValidationError{Code = ErrorCode.InvalidModulus, Message = "mod 97-10 check failed."};
-            var checkDigits = CalculateCheckDigits(rFCreditorReference);
+            var checkDigits = new RFCreditorReferenceValidator().CalculateCheckCharacters(rFCreditorReference);
             Console.WriteLine(_rFCreditorReference.Substring(0,_rFCreditorReference.Length - 4));
             _result.Error.Message += $" Correct check digits for this IBAN are {checkDigits}";
             return _result;
         }
         
     }
-    public static string CalculateCheckDigits(string reference)
+    public string CalculateCheckCharacters(string reference)
     {
         string _reference = reference;
         if(string.IsNullOrEmpty(_reference) || _reference.Length < 2)
         {
-            throw new ArgumentException("Refernce is empty or too short");
+            throw new ArgumentException("Reference is empty or too short");
         }
 
         string firstFour = _reference.Substring(0, 2);
@@ -76,5 +78,18 @@ public class RFCreditorReferenceValidator : IAccountValidator
 
         var checkdigits = new ISO7064_MOD9710().Calculate(_reference);
         return checkdigits;
+    }
+
+    public string CalculateReference(string reference)
+    {
+        string _reference = reference;
+        if(string.IsNullOrEmpty(_reference) || _reference.Length < 2)
+        {
+            throw new ArgumentException("Reference is empty or too short");
+        }
+
+        var checkCharacters = CalculateCheckCharacters(_reference);
+        return "RF" + checkCharacters + _reference;
+
     }
 }

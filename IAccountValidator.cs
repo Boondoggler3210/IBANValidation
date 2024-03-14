@@ -1,7 +1,9 @@
 namespace Iban
 {
-    public interface IAccountValidator
+    public interface IReferenceOrAccountValidator
     {
-        ValidationResult Validate(string account);
+        ValidationResult Validate(string referenceOrAccount);
+        string CalculateCheckCharacters(string referenceOrAccount);
+
     }
 }
