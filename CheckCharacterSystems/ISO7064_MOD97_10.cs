@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace CheckCharacterSystems
 {
-    public class ISO7064_MOD9710 : ICheckCharacterSystem
+    public class ISO7064_MOD97_10 : ICheckCharacterSystem
     {
         public bool Validate(string reference)
         {

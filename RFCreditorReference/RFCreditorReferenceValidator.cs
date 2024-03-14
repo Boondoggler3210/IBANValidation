@@ -3,7 +3,7 @@ using Iban;
 
 namespace RFCreditorReference;
 
-public class RFCreditorReferenceValidator : IReferenceOrAccountValidator
+public class RFCreditorReferenceValidator : IReferenceOrAccountValidator, ICheckCharacterCalculator
 {
     public ValidationResult Validate(string rFCreditorReference)
     {
@@ -45,7 +45,7 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator
         _rFCreditorReference = _rFCreditorReference.Remove(0, 4);
         _rFCreditorReference += firstFour;
         
-        var modulusResult = new ISO7064_MOD9710();
+        var modulusResult = new ISO7064_MOD97_10();
         
         if (modulusResult.Validate(_rFCreditorReference) == true)
         {
@@ -76,7 +76,7 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator
         _reference = _reference.Remove(0, 4);
         _reference += firstFour;
 
-        var checkdigits = new ISO7064_MOD9710().Calculate(_reference);
+        var checkdigits = new ISO7064_MOD97_10().Calculate(_reference);
         return checkdigits;
     }
 

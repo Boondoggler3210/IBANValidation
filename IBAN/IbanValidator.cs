@@ -5,7 +5,7 @@ using CheckCharacterSystems;
 
 namespace Iban;
 
-public class IbanValidator : IReferenceOrAccountValidator
+public class IbanValidator : IReferenceOrAccountValidator, ICheckCharacterCalculator
 {   
 
     public ValidationResult Validate(string iban)
@@ -113,7 +113,7 @@ public class IbanValidator : IReferenceOrAccountValidator
         _iban = _iban.Remove(0, 4);
         _iban += firstFour;
         
-        var modulusResult = new ISO7064_MOD9710();
+        var modulusResult = new ISO7064_MOD97_10();
         
         if (modulusResult.Validate(_iban) == true)
         {
@@ -178,7 +178,7 @@ public class IbanValidator : IReferenceOrAccountValidator
         _iban += firstFour;
         
 
-        var checkdigits = new ISO7064_MOD9710().Calculate(_iban);
+        var checkdigits = new ISO7064_MOD97_10().Calculate(_iban);
         return checkdigits;
     }
 

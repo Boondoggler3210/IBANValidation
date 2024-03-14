@@ -4,7 +4,7 @@ using Bic.Data;
 
 namespace Bic;
 
-public class BicValidator : IAccountValidator 
+public class BicValidator : IReferenceOrAccountValidator 
 {
     public ValidationResult Validate(string bic)
     {
@@ -41,7 +41,10 @@ public class BicValidator : IAccountValidator
         if(countryCodeCheckResult.IsValid == false)
         {
             _result.IsValid = false;
-            _result.Errors.Add(countryCodeCheckResult.Error);
+            if(countryCodeCheckResult.Error != null)
+            {
+                _result.Errors.Add(countryCodeCheckResult.Error);
+            }
         }
         return _result;
     }

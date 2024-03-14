@@ -1,5 +1,6 @@
 ﻿using Bic;
 using Bic.Data;
+using CheckCharacterSystems;
 using Iban;
 using RFCreditorReference;
 
@@ -92,7 +93,7 @@ var ibans =  new List<string>(){"AD1200012030200359100100",
 "XK051212012345678906"
 };
 
-
+Console.WriteLine("IBAN Validation");
 IbanValidator validator = new IbanValidator();
 
 foreach(var iban in ibans)
@@ -111,11 +112,12 @@ foreach(var iban in ibans)
 
 }
 
+Console.WriteLine();
+Console.WriteLine("BIC Validation");
 BicValidator bicValidator = new BicValidator();
 
 var bicRes = bicValidator.Validate("RABOZZ2U");
 
-Console.WriteLine();
 Console.WriteLine(bicRes.IsValid);
 foreach(var error in bicRes.Errors)
 {
@@ -123,13 +125,17 @@ foreach(var error in bicRes.Errors)
     Console.WriteLine(error.Message);
 }
 
+
+Console.WriteLine();
+Console.WriteLine("RFCreditorReference Validation");
 RFCreditorReferenceValidator rFCreditorReferenceValidator = new RFCreditorReferenceValidator();
 
-var rFCreditorReferenceRes = rFCreditorReferenceValidator.Validate("RF58539007547034");
-Console.WriteLine();
+var rFCreditorReferenceRes = rFCreditorReferenceValidator.Validate("RF18539007547034");
 Console.WriteLine(rFCreditorReferenceRes.IsValid);
 foreach(var error in rFCreditorReferenceRes.Errors)
 {
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);
 }
+
+
