@@ -3,6 +3,7 @@ using Bic.Data;
 using CheckCharacterSystems;
 using Iban;
 using RFCreditorReference;
+using USRoutingNumber;
 
 var ibans =  new List<string>(){"AD1200012030200359100100",
 "AE070331234567890123456",
@@ -138,4 +139,14 @@ foreach(var error in rFCreditorReferenceRes.Errors)
     Console.WriteLine(error.Message);
 }
 
+
+Console.WriteLine();
+Console.WriteLine("US Routing Number Validation");
+var usRoutingNumberValidator = new USRoutingNumberValidator().Validate("111000038");
+Console.WriteLine(usRoutingNumberValidator.IsValid);
+foreach(var error in usRoutingNumberValidator.Errors)
+{
+    Console.WriteLine(error.Code);
+    Console.WriteLine(error.Message);
+}
 

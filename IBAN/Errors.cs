@@ -4,7 +4,8 @@ public enum ErrorCode
     InvalidLength,
     InvalidFormat,
     InvalidModulus,
-    InvalidCountryCode
+    InvalidCountryCode,
+    InvalidCharacter,
 }
 
 public class ValidationError
