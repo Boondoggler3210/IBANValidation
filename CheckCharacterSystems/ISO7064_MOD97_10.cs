@@ -46,7 +46,12 @@ namespace CheckCharacterSystems
             foreach(var c in _reference)
             {
                 int value = 0;
-                if (char.IsLetter(c))
+                if(char.IsLetterOrDigit(c) == false)
+                {
+                    BigInteger illegalCharacterResult = -1;
+                    return illegalCharacterResult;
+                }
+                else if(char.IsLetter(c))
                 {   
                     var letter = char.ToUpper(c);
                     value = letter - 55;
@@ -64,7 +69,8 @@ namespace CheckCharacterSystems
             }
             else
             {
-                throw new ArgumentException("Reference could not be converted to BigInteger");
+                result = -1;
+                return result;
             }
         }
     }

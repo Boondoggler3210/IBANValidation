@@ -65,7 +65,7 @@ public class IbanValidator : IReferenceOrAccountValidator, ICheckCharacterCalcul
     private static LengthCheckResult CheckLength(string iban)
     {
         var _result = new LengthCheckResult();
-        if(string.IsNullOrEmpty(iban) || iban.Length < 2)
+        if(string.IsNullOrEmpty(iban) || iban.Length <= 4)
         {
             _result.IsValid = false;
             _result.Error = new ValidationError{Code = ErrorCode.EmptyOrTooShort, Message = "IBAN is empty or too short"};
@@ -137,6 +137,13 @@ public class IbanValidator : IReferenceOrAccountValidator, ICheckCharacterCalcul
         {
             result.IsValid = false;
             result.Error = new ValidationError{Code = ErrorCode.EmptyOrTooShort, Message = "IBAN is empty or Too short"};
+            return result;
+        }
+
+        if(!iban.All(Char.IsLetterOrDigit))
+        {
+            result.IsValid = false;
+            result.Error = new ValidationError { Code = ErrorCode.InvalidCharacter, Message = "IBAN contains invalid characters"};
             return result;
         }
 
