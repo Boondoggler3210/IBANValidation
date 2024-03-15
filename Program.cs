@@ -142,11 +142,15 @@ foreach(var error in rFCreditorReferenceRes.Errors)
 
 Console.WriteLine();
 Console.WriteLine("US Routing Number Validation");
-var usRoutingNumberValidator = new USRoutingNumberValidator().Validate("111000038");
-Console.WriteLine(usRoutingNumberValidator.IsValid);
-foreach(var error in usRoutingNumberValidator.Errors)
+var usRoutingNumberValidation = new USRoutingNumberValidator().Validate("789456124");
+Console.WriteLine(usRoutingNumberValidation.IsValid);
+foreach(var error in usRoutingNumberValidation.Errors)
 {
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);
 }
 
+Console.WriteLine();
+Console.WriteLine("US Routing Number Check Character Calculation");
+var usRoutingNumberCheckCharacter = new USRoutingNumberValidator().CalculateCheckCharacters("78945612");
+Console.WriteLine(usRoutingNumberCheckCharacter);

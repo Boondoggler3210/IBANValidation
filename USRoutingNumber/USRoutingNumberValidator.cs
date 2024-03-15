@@ -27,7 +27,7 @@ public class USRoutingNumberValidator : IReferenceOrAccountValidator, ICheckChar
 			
 		}
 		var total = (3*(routingCodeAsIntArray[0] + routingCodeAsIntArray[3] + routingCodeAsIntArray[6])) +  (7*(routingCodeAsIntArray[1] + routingCodeAsIntArray[4] + routingCodeAsIntArray[7])) + (routingCodeAsIntArray[2] + routingCodeAsIntArray[5]);
-		var checkDigit = 40 - total;
+		var checkDigit = 10 - (total % 10);
         return checkDigit.ToString();
     }
 
