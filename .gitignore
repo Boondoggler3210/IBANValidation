@@ -482,8 +482,11 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+<<<<<<< HEAD
 
 # Reference material used when developing
 CountryExamplesAndPatterns.xlsx
 iban-registry_2.pdf
 IBANVerification-ALPE.sln
+=======
+>>>>>>> IBANValidation.Tests/main
