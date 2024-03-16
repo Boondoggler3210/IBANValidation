@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IBANValidation\IBANValidation.csproj" />
+    <ProjectReference Include="..\src\IBANValidation.csproj" />
   </ItemGroup>
 
 </Project>
