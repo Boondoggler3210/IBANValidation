@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IBANValidation", "IBANValidation.csproj", "{767A85EB-F955-447C-B24E-B07E3A97DF16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IBANValidation", "src\IBANValidation.csproj", "{767A85EB-F955-447C-B24E-B07E3A97DF16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBANValidation.Tests", "..\IBANValidation.Tests\IBANValidation.Tests.csproj", "{6B6DE873-C2A9-4F09-A422-14F299990E0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBANValidation.Tests", "tests\IBANValidation.Tests.csproj", "{6B6DE873-C2A9-4F09-A422-14F299990E0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
