@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBANValidation.Tests
+namespace IBANValidation.Tests.IBAN
 {
     internal class IbanTestDataValidIbans : TheoryData<string>
     {
-        public IbanTestDataValidIbans() 
+        public IbanTestDataValidIbans()
         {
             Add("AD1200012030200359100100");
             Add("AE070331234567890123456");

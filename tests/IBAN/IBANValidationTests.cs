@@ -1,6 +1,6 @@
 using Iban;
 
-namespace IBANValidation.Tests
+namespace IBANValidation.Tests.IBAN
 {
     public class IBANValidationTests
     {
@@ -54,8 +54,8 @@ namespace IBANValidation.Tests
         [ClassData(typeof(IbanTestDataValidIbans))]
         public void IBANValidator_Validate_ReturnsTrueWhenIBANIsValid(string validIban)
         {
-                var result = _ibanValidator.Validate(validIban);
-                Assert.True(result.IsValid);
+            var result = _ibanValidator.Validate(validIban);
+            Assert.True(result.IsValid);
         }
 
         [Theory]
@@ -65,6 +65,23 @@ namespace IBANValidation.Tests
             var result = _ibanValidator.Validate(invalidCheckChars);
             Assert.False(result.IsValid);
             Assert.Contains(result.Errors, e => e.Code == ErrorCode.InvalidModulus);
+        }
+
+        [Theory]
+        [ClassData(typeof(IbanTestDataInvalidFormats))]
+        public void IBANValidator_Validate_ReturnsFalseWhenIBANHasInvalidFormat(string invalidFormat)
+        {
+            var result = _ibanValidator.Validate(invalidFormat);
+            Assert.False(result.IsValid);
+            Assert.Contains(result.Errors, e => e.Code == ErrorCode.InvalidFormat);
+        }
+
+        [Theory]
+        [ClassData(typeof(IbanTestDataValidIbans))]
+        public void IBANVAlidator_CalculateCheckCharacters_RetrunsCorrectDigits(string validIban)
+        {
+            var checkDigits = _ibanValidator.CalculateCheckCharacters(validIban);
+            Assert.Equal(validIban.Substring(2, 2), checkDigits);
         }
     }
 }

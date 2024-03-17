@@ -1,4 +1,5 @@
 using Iban;
+using IBANValidation.USRoutingNumber;
 
 namespace USRoutingNumber;
 
@@ -11,7 +12,6 @@ public class USRoutingNumberValidator : IReferenceOrAccountValidator, ICheckChar
         {
             return "";
         }
-
 
 		int[] routingCodeAsIntArray = new int[9];
 		int count = 0;
@@ -27,7 +27,11 @@ public class USRoutingNumberValidator : IReferenceOrAccountValidator, ICheckChar
 			
 		}
 		var total = (3*(routingCodeAsIntArray[0] + routingCodeAsIntArray[3] + routingCodeAsIntArray[6])) +  (7*(routingCodeAsIntArray[1] + routingCodeAsIntArray[4] + routingCodeAsIntArray[7])) + (routingCodeAsIntArray[2] + routingCodeAsIntArray[5]);
-		var checkDigit = 10 - (total % 10);
+		if(total % 10 == 0)
+        {
+           return "0";
+        }
+        var checkDigit = 10 - (total % 10);
         return checkDigit.ToString();
     }
 
@@ -39,6 +43,15 @@ public class USRoutingNumberValidator : IReferenceOrAccountValidator, ICheckChar
             return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidLength, Message = "US Routing Number must be 9 digits in length." } } };
         }
 
+        if(_referenceOrAccount.Any(c => !Char.IsDigit(c)))
+        {
+            return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidCharacter, Message = "US Routing Number must be numeric." } } };
+        }
+
+        if(USRoutingNumberData.Prefixes.Contains(_referenceOrAccount.Substring(0,2)) == false)
+        {
+            return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidPrefix, Message = "US Routing Number must start with a valid prefix." } } };
+        }
 
 		int[] routingCodeAsIntArray = new int[9];
 		int count = 0;

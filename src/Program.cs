@@ -152,5 +152,5 @@ foreach(var error in usRoutingNumberValidation.Errors)
 
 Console.WriteLine();
 Console.WriteLine("US Routing Number Check Character Calculation");
-var usRoutingNumberCheckCharacter = new USRoutingNumberValidator().CalculateCheckCharacters("78945612");
+var usRoutingNumberCheckCharacter = new USRoutingNumberValidator().CalculateCheckCharacters("08100021");
 Console.WriteLine(usRoutingNumberCheckCharacter);

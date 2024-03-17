@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBANValidation.Tests
+namespace IBANValidation.Tests.IBAN
 {
     internal class IbanTestDataInvalidCheckChars : TheoryData<string>
     {

@@ -17,6 +17,13 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator, ICheck
             return _result;
         }
 
+        if(_rFCreditorReference.Substring(0,2) != "RF")
+        {
+            _result.IsValid = false;
+            _result.Errors.Add(new ValidationError { Code = ErrorCode.InvalidPrefix, Message = "RFCreditorReference must start with RF" });
+            return _result;
+        }
+
         var modulusCheckResult = CheckModulus(_rFCreditorReference);
         if (modulusCheckResult.IsValid == false)
         {

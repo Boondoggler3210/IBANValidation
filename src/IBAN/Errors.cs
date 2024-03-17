@@ -6,6 +6,7 @@ public enum ErrorCode
     InvalidModulus,
     InvalidCountryCode,
     InvalidCharacter,
+    InvalidPrefix
 }
 
 public class ValidationError
