@@ -15,7 +15,6 @@ namespace IBANValidation.Tests.USRoutingNumber
         [InlineData("123")]
         [InlineData("1234567891")]
         [InlineData("T")]
-        [InlineData("1234567891")]
         [InlineData("12345678")]
         public void USRoutingNumberValidator_Validate_ReturnsFalseWhenReferenceIsWrongLength(string reference)
         {

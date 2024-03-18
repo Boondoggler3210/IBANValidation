@@ -47,10 +47,11 @@ namespace IBANValidation.Tests.RFCreditorReference
             Assert.Contains(result.Errors, e => e.Code == ErrorCode.InvalidLength);
         }
 
-        [Fact]
-        public void RFCreditorReferenceValidator_Validate_ReturnsTrueWhenReferenceIsValid()
+        [Theory]
+        [ClassData(typeof(RFCreditorReferenceTestDataValidReferences))]
+        public void RFCreditorReferenceValidator_Validate_ReturnsTrueWhenReferenceIsValid(string reference)
         {
-            var result = _rfCreditorReferenceValidator.Validate("RF18539007547034");
+            var result = _rfCreditorReferenceValidator.Validate(reference);
             Assert.True(result.IsValid);
         }
 
@@ -74,5 +75,14 @@ namespace IBANValidation.Tests.RFCreditorReference
             Assert.False(result.IsValid);
             Assert.Contains(result.Errors, e => e.Code == ErrorCode.InvalidPrefix);
         }
+
+        [Theory]
+        [ClassData(typeof(RFCreditorReferenceTestDataRefAndExpectedRFRef))]
+        public void RFCreditorReferenceValidator_CalculateCheckCharacters_ReturnsExpectedCheckCharacters(string expected, string reference)
+        {
+            var result = _rfCreditorReferenceValidator.CalculateReference(reference);
+            Assert.Equal(expected, result);
+        }
+
     }
 }

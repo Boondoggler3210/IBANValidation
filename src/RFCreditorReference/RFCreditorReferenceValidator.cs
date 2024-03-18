@@ -63,7 +63,7 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator, ICheck
         {
             _result.IsValid = false;
             _result.Error = new ValidationError{Code = ErrorCode.InvalidModulus, Message = "mod 97-10 check failed."};
-            var checkDigits = new RFCreditorReferenceValidator().CalculateCheckCharacters(rFCreditorReference);
+            var checkDigits = new RFCreditorReferenceValidator().CalculateCheckCharacters(RemoveFirstFourCharacters(rFCreditorReference));
             Console.WriteLine(_rFCreditorReference.Substring(0,_rFCreditorReference.Length - 4));
             _result.Error.Message += $" Correct check digits for this IBAN are {checkDigits}";
             return _result;
@@ -78,13 +78,19 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator, ICheck
             throw new ArgumentException("Reference is empty or too short");
         }
 
-        string firstFour = _reference.Substring(0, 2);
-        firstFour += "00";
-        _reference = _reference.Remove(0, 4);
+        
+        string firstFour = "RF00";
+        
         _reference += firstFour;
 
         var checkdigits = new ISO7064_MOD97_10().Calculate(_reference);
         return checkdigits;
+    }
+
+    public static string RemoveFirstFourCharacters(string reference)
+    {
+        string _reference = reference;
+        return _reference.Substring(4);
     }
 
     public string CalculateReference(string reference)
