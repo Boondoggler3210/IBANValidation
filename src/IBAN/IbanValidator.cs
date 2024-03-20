@@ -85,7 +85,7 @@ public class IbanValidator : IReferenceOrAccountValidator, ICheckCharacterCalcul
             else
             {
                 _result.IsValid = false;
-                _result.Error = new ValidationError{Code = ErrorCode.InvalidLength, Message = $"IBAN length is valid for country code {countryCode}"} ;
+                _result.Error = new ValidationError{Code = ErrorCode.InvalidLength, Message = $"IBAN length is not valid for country code {countryCode}"} ;
                 return _result;
             }
         }

@@ -73,7 +73,7 @@ public class RFCreditorReferenceValidator : IReferenceOrAccountValidator, ICheck
     public string CalculateCheckCharacters(string reference)
     {
         string _reference = reference;
-        if(string.IsNullOrEmpty(_reference) || _reference.Length < 2)
+        if(string.IsNullOrEmpty(_reference))
         {
             throw new ArgumentException("Reference is empty or too short");
         }
