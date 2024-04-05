@@ -17,16 +17,16 @@ namespace IBANValidation.CheckCharacterSystems
             int _sumOfOdd = 0;
             int _sumOfEven = 0;
 
-            foreach (var c in reference)
+            for (int i = reference.Length -1; i>=0; i--)
             {
                 int _value = 0;
-                if (!char.IsDigit(c))
+                if (!char.IsDigit(reference[i]))
                 {
                     return "";
                 }
-                _value = (int)char.GetNumericValue(c);
+                _value = (int)char.GetNumericValue(reference[i]);
 
-                if (_counter % 2 == 0)
+                if (i % 2 == 0)
                 {
                     _sumOfEven += _value;
                 }
@@ -38,7 +38,7 @@ namespace IBANValidation.CheckCharacterSystems
                 _counter++;
             }
 
-            _sumOfEven *= 3;
+            _sumOfOdd *= 3;
             int _totalSum = _sumOfOdd + _sumOfEven;
 
             if (_totalSum % 10 == 0)
