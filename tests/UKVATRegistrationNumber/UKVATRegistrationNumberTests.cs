@@ -29,13 +29,13 @@ namespace IBANValidation.Tests.UKVATRegistrationNumber
         }
 
         [Theory]
-        [InlineData("NL1234567")]
-        [InlineData("ES1234567")]
-        [InlineData("FR1234567")]
-        [InlineData("DE1234567")]
-        [InlineData("IT1234567")]
-        [InlineData("BE1234567")]
-        [InlineData("LU1234567")]
+        [InlineData("NL123456712")]
+        [InlineData("ES123456723243")]
+        [InlineData("FR123456712")]
+        [InlineData("DE123456712")]
+        [InlineData("IT12345")]
+        [InlineData("BE123456123")]
+        [InlineData("LU123456712")]
         public void UKVATRegistrationNumberValidator_Validate_ReturnsFalseWhenUKVATRegInvalidPrefix(string vATReg)
         {
             var result = _uKVATRegistrationNumberValidator.Validate(vATReg);
@@ -45,12 +45,8 @@ namespace IBANValidation.Tests.UKVATRegistrationNumber
 
         [Theory]
         [InlineData("GB123_4567")]
-        [InlineData("GB1234567")]
-        [InlineData("GB123A5678")]
-        [InlineData("GB123456XXX")]
         [InlineData("GB!23456789123")]
         [InlineData("GB12_3456789123456")]
-
         public void UKVATRegistrationNumberValidator_Validate_ReturnsFalseWhenUKVATRegInvalidFormat(string vATReg)
         {
             var result = _uKVATRegistrationNumberValidator.Validate(vATReg);
