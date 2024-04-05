@@ -3,6 +3,7 @@ using Bic.Data;
 using CheckCharacterSystems;
 using Iban;
 using IBANValidation.CheckCharacterSystems;
+using IBANValidation.GlobalLocationNumber;
 using IBANValidation.UKVATRegistrationNumber;
 using RFCreditorReference;
 using USRoutingNumber;
@@ -164,6 +165,18 @@ Console.WriteLine("UK VAT Registration Number Validation");
 var uKVATRegistrationNumberValidation = new UKVATRegistrationNumberValidator().Validate("GBHA951");
 Console.WriteLine(uKVATRegistrationNumberValidation.IsValid);
 foreach(var error in uKVATRegistrationNumberValidation.Errors)
+{
+    Console.WriteLine(error.Code);
+    Console.WriteLine(error.Message);
+}
+
+
+
+Console.WriteLine();
+Console.WriteLine("Global Location Number Check Character Calculation");
+var globalLocationNumberValidation = new GlobalLocationNumberValidator().Validate("0847976000005"); 
+Console.WriteLine(globalLocationNumberValidation.IsValid);
+foreach(var error in globalLocationNumberValidation.Errors)
 {
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);

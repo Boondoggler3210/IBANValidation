@@ -2,7 +2,7 @@ namespace CheckCharacterSystems
 {
     public interface ICheckCharacterSystem
     {
-        bool Validate(string reference);
-        string Calculate(string reference);
+        bool Validate(string referenceWithoutCheckCharacters);
+        string Calculate(string referenceIncludingCheckCharacters);
     }
 }
