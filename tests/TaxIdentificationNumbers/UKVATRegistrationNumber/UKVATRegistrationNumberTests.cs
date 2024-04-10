@@ -1,5 +1,5 @@
 ﻿using Iban;
-using IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber;
+using IBANValidation.Validators.TaxIdentificationNumbers.UKVATRegistrationNumber;
 
 namespace IBANValidation.Tests.TaxIdentificationNumbers.UKVATRegistrationNumber
 {

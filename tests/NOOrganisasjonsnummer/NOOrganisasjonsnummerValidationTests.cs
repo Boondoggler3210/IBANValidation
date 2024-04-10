@@ -1,5 +1,5 @@
 ﻿using IBANValidation.GlobalLocationNumber;
-using IBANValidation.NOOrganisasjonsnummer;
+using IBANValidation.Validators.NOOrganisasjonsnummer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

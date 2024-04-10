@@ -1,4 +1,4 @@
-﻿using RFCreditorReference;
+﻿using IBANValidation.Validators.RFCreditorReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;

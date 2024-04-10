@@ -1,11 +1,11 @@
 using System.Collections.ObjectModel;
-namespace Iban.Data;
+namespace IBANValidation.Validators.IBAN.Data;
 
 
 public class IbanCountryData
 {
     public string CountryCode { get; set; } = string.Empty;
-    public string CountryName { get; set;} = string.Empty;
+    public string CountryName { get; set; } = string.Empty;
     public int Length { get; set; }
     public string IBANFormatRegex { get; set; } = string.Empty;
 }
@@ -102,7 +102,7 @@ public static class IbanData
         { "XK", new IbanCountryData { CountryCode = "XK", CountryName = "Kosovo", Length = 20, IBANFormatRegex = "XK[0-9]{2}[0-9]{4}[0-9]{10}[0-9]{2}$" } }
     });
 
-    public static ReadOnlyDictionary<string, int> Lengths {get;} = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>
+    public static ReadOnlyDictionary<string, int> Lengths { get; } = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>
         {
             { "AD", 24 },
             { "AE", 23 },
@@ -193,7 +193,7 @@ public static class IbanData
             { "XK", 20 }
         });
 
-    public static ReadOnlyDictionary<string, int> CharacterValues {get;} = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>
+    public static ReadOnlyDictionary<string, int> CharacterValues { get; } = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>
         {
             { "A", 10 },
             { "B", 11 },

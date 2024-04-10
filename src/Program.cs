@@ -1,13 +1,11 @@
-﻿using Bic;
-using Bic.Data;
-using CheckCharacterSystems;
-using Iban;
-using IBANValidation.CheckCharacterSystems;
-using IBANValidation.GlobalLocationNumber;
-using IBANValidation.NOOrganisasjonsnummer;
-using IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber;
-using RFCreditorReference;
-using USRoutingNumber;
+﻿using IBANValidation.CheckCharacterSystems;
+using IBANValidation.Validators.BIC;
+using IBANValidation.Validators.GlobalLocationNumber;
+using IBANValidation.Validators.IBAN;
+using IBANValidation.Validators.NOOrganisasjonsnummer;
+using IBANValidation.Validators.RFCreditorReference;
+using IBANValidation.Validators.TaxIdentificationNumbers.UKVATRegistrationNumber;
+using IBANValidation.Validators.USRoutingNumber;
 
 var ibans =  new List<string>(){"AD1200012030200359100100",
 "AE070331234567890123456",
@@ -192,3 +190,8 @@ foreach (var error in nOOrganisasjonsnummerValidation.Errors)
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);
 }
+
+
+var luhn = new Luhn();
+Console.WriteLine(luhn.Calculate("556667475"));
+Console.WriteLine(luhn.Validate("5566674758"));

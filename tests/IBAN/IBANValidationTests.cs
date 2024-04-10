@@ -1,4 +1,4 @@
-using Iban;
+using IBANValidation.Validators.IBAN;
 
 namespace IBANValidation.Tests.IBAN
 {

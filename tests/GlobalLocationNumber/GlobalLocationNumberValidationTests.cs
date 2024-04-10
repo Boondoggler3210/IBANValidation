@@ -1,4 +1,4 @@
-﻿using IBANValidation.GlobalLocationNumber;
+﻿using IBANValidation.Validators.GlobalLocationNumber;
 using System;
 using System.Collections.Generic;
 using System.Linq;

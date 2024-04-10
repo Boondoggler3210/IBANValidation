@@ -1,4 +1,4 @@
-﻿using USRoutingNumber;
+﻿using IBANValidation.Validators.USRoutingNumber;
 
 namespace IBANValidation.Tests.USRoutingNumber
 {

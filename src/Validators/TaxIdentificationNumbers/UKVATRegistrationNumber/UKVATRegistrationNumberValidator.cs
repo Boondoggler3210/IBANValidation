@@ -1,7 +1,7 @@
-﻿using Iban;
-using IBANValidation.CheckCharacterSystems;
+﻿using IBANValidation.CheckCharacterSystems;
+using IBANValidation.Validators.IBAN;
 
-namespace IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber
+namespace IBANValidation.Validators.TaxIdentificationNumbers.UKVATRegistrationNumber
 {
     public class UKVATRegistrationNumberValidator : IReferenceOrAccountValidator
     {

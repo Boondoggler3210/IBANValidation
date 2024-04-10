@@ -1,4 +1,6 @@
-namespace Iban
+using IBANValidation.Validators.IBAN;
+
+namespace IBANValidation.Validators
 {
     public interface IReferenceOrAccountValidator
     {

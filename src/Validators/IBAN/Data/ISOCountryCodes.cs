@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Bic.Data;
+namespace IBANValidation.Validators.IBAN.Data;
 
 public static class IsoCountryCodes
 {

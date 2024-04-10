@@ -1,4 +1,4 @@
-namespace Iban
+namespace IBANValidation.CheckCharacterSystems
 {
     public interface ICheckCharacterCalculator
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBANValidation.USRoutingNumber
+namespace IBANValidation.Validators.USRoutingNumber
 {
     public class USRoutingNumberData
     {

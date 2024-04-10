@@ -1,5 +1,5 @@
-﻿using Bic;
-using Iban;
+﻿using Iban;
+using IBANValidation.Validators.BIC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
