@@ -1,8 +1,7 @@
 ﻿using Iban;
-using IBANValidation.UKVATRegistrationNumber;
+using IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber;
 
-
-namespace IBANValidation.Tests.UKVATRegistrationNumber
+namespace IBANValidation.Tests.TaxIdentificationNumbers.UKVATRegistrationNumber
 {
     public class UKVATRegistrationNumberTests
     {

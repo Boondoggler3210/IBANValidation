@@ -1,7 +1,7 @@
 ﻿using Iban;
 using IBANValidation.CheckCharacterSystems;
 
-namespace IBANValidation.UKVATRegistrationNumber
+namespace IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber
 {
     public class UKVATRegistrationNumberValidator : IReferenceOrAccountValidator
     {
@@ -9,15 +9,15 @@ namespace IBANValidation.UKVATRegistrationNumber
         private readonly int[] _lengthsThatMustIncludeCountryCode = { 7, 11, 14 };
         public ValidationResult Validate(string uKVATRegistrationNumber)
         {
-           
-            var _uKVATRegistrationNumber = uKVATRegistrationNumber.Replace(" ", String.Empty);
-            _uKVATRegistrationNumber = _uKVATRegistrationNumber.Replace("-", String.Empty);
-            
+
+            var _uKVATRegistrationNumber = uKVATRegistrationNumber.Replace(" ", string.Empty);
+            _uKVATRegistrationNumber = _uKVATRegistrationNumber.Replace("-", string.Empty);
+
             if (string.IsNullOrEmpty(_uKVATRegistrationNumber))
             {
                 return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidLength, Message = "UK VAT Registration Number must be 9 Characters in length." } } };
             }
-            
+
             if (!_uKVATRegistrationNumber.All(char.IsLetterOrDigit))
             {
                 return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidFormat, Message = "UK VAT Registration Number must contain only letters and numbers." } } };
@@ -27,8 +27,8 @@ namespace IBANValidation.UKVATRegistrationNumber
             {
                 return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidLength, Message = "UK VAT Registration Number must be 5, 7, 9, 11, 12 or 14 Characters in length." } } };
             }
-            
-            if (_lengthsThatMustIncludeCountryCode.Contains(_uKVATRegistrationNumber.Length) && _uKVATRegistrationNumber.Substring(0,2) != "GB")
+
+            if (_lengthsThatMustIncludeCountryCode.Contains(_uKVATRegistrationNumber.Length) && _uKVATRegistrationNumber.Substring(0, 2) != "GB")
             {
                 return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidPrefix, Message = "7, 11 and 14  Character UK VAT Registration Number must start with GB" } } };
             }
@@ -36,11 +36,11 @@ namespace IBANValidation.UKVATRegistrationNumber
             var _reference = "";
 
             switch (_uKVATRegistrationNumber.Length)
-            {                 
+            {
                 case 14:
                 case 11:
                     _reference = _uKVATRegistrationNumber.Substring(2, 9);
-                   break;
+                    break;
                 case 12:
                     _reference = _uKVATRegistrationNumber.Substring(0, 9);
                     break;
@@ -51,7 +51,7 @@ namespace IBANValidation.UKVATRegistrationNumber
                     }
                     else
                     {
-                        return new ValidationResult() { IsValid = true};
+                        return new ValidationResult() { IsValid = true };
                     };
                 case 5:
                     if (!ValidateFiveCharacterUKVATRegistrationNumber(_uKVATRegistrationNumber))
@@ -73,8 +73,8 @@ namespace IBANValidation.UKVATRegistrationNumber
             {
                 return new ValidationResult { IsValid = false, Errors = new List<ValidationError> { new ValidationError { Code = ErrorCode.InvalidModulus, Message = "UK VAT Registration Number's check Digits are not valid." } } };
             }
-            return new ValidationResult() { IsValid = true};
- 
+            return new ValidationResult() { IsValid = true };
+
         }
 
         private bool ValidateFiveCharacterUKVATRegistrationNumber(string uKVATRegistrationNumber)
@@ -86,11 +86,11 @@ namespace IBANValidation.UKVATRegistrationNumber
 
             string[] shortUKVATRegistrationNumberPrefixes = { "GD", "HA" };
 
-            if (!shortUKVATRegistrationNumberPrefixes.Contains(uKVATRegistrationNumber.Substring(0, 2))) 
+            if (!shortUKVATRegistrationNumberPrefixes.Contains(uKVATRegistrationNumber.Substring(0, 2)))
             {
                 return false;
             }
-            
+
             if (!uKVATRegistrationNumber.Substring(2, 3).All(char.IsDigit))
             {
                 return false;
@@ -112,7 +112,7 @@ namespace IBANValidation.UKVATRegistrationNumber
                     return false;
                 }
             }
-         
+
             return true;
         }
     }

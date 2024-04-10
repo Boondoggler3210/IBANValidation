@@ -4,7 +4,8 @@ using CheckCharacterSystems;
 using Iban;
 using IBANValidation.CheckCharacterSystems;
 using IBANValidation.GlobalLocationNumber;
-using IBANValidation.UKVATRegistrationNumber;
+using IBANValidation.NOOrganisasjonsnummer;
+using IBANValidation.TaxIdentificationNumbers.UKVATRegistrationNumber;
 using RFCreditorReference;
 using USRoutingNumber;
 
@@ -177,6 +178,16 @@ Console.WriteLine("Global Location Number Check Character Calculation");
 var globalLocationNumberValidation = new GlobalLocationNumberValidator().Validate("0847976000005"); 
 Console.WriteLine(globalLocationNumberValidation.IsValid);
 foreach(var error in globalLocationNumberValidation.Errors)
+{
+    Console.WriteLine(error.Code);
+    Console.WriteLine(error.Message);
+}
+
+Console.WriteLine();
+Console.WriteLine("Norwegian Organisasjonsnummer Check Character Calculation");
+var nOOrganisasjonsnummerValidation = new NOOrganisasjonsnummerValidator().Validate("913965639");
+Console.WriteLine(nOOrganisasjonsnummerValidation.IsValid);
+foreach (var error in nOOrganisasjonsnummerValidation.Errors)
 {
     Console.WriteLine(error.Code);
     Console.WriteLine(error.Message);
