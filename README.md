@@ -11,3 +11,4 @@ This project provides a solution for validating International Bank Account Numbe
 - RF Creditor Reference: Generate a RF Creditor Reference from an existing reference.
 - US Bank Routing Number: Validate a reference based on length, check Character and prefix.
 - UK VAT Registration Number: Validate format and check characters. This should can be useful for checking numbers when  the HMRC API that allows for online validation is not available.
+- GLN - Global location number: Validate length and check character.
