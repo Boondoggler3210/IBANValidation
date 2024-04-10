@@ -12,3 +12,4 @@ This project provides a solution for validating International Bank Account Numbe
 - US Bank Routing Number: Validate a reference based on length, check Character and prefix.
 - UK VAT Registration Number: Validate format and check characters. This should can be useful for checking numbers when  the HMRC API that allows for online validation is not available.
 - GLN - Global location number: Validate length and check character.
+- Norwegian Organisasjonsnummer: Validate length, content and check character.
